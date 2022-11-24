@@ -9,10 +9,11 @@ public class Main {
     public static void main(String[] args) {
 
         // Quantum World Setup
-        QuantumRealm quantumRealm = new QuantumRealm(2, 2);
+        QuantumRealm quantumRealm = new QuantumRealm(2, 5);
+        quantumRealm.calculateEntropy();
+        quantumRealm.collapseRealm();
         quantumRealm.displayRealm();
 
-        // Keeps Track of Entropy For All Spaces
-        PriorityQueue entropyStorage = new PriorityQueue(quantumRealm.getRealm().length*quantumRealm.getRealm()[0].length);
+
     }
 }

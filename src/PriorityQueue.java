@@ -7,7 +7,7 @@ Date due: 12/6/2022
 
 isEmpty() - iterate through the array, if a value is not 0 (default int value), then return false, else return true
 isFull() - iterate through array, if a value is 0 then return false, else return true
-insert(int insertInt) - set iterative var. check if the queue is full. if so, nothing can be added.
+insert(Space insertSpace) - set insertInt = insertSpace.getEntropy set iterative var. check if the queue is full. if so, nothing can be added.
                         then check if the queue is empty, if so, insert the element in the first spot in queue
                         else iterate through the array from the back using your iterative var, if insertInt > queue[iterative var]. else break b/c index has been found
                         if above statement is true, set the next open spot = element of queue at current iteration. this shifts it over
@@ -19,11 +19,11 @@ peekMinimum() - return queue[amtOfItems-1], which returns the last element in th
  */
 
 public class PriorityQueue {
-    int[] queue;
+    Space[] queue;
     int amtOfItems = 0;
 
     public PriorityQueue(int size) {
-        queue = new int[size];
+        queue = new Space[size];
         amtOfItems = 0;
     }
 
@@ -38,7 +38,8 @@ public class PriorityQueue {
     }
 
     // Checks if Queue Is Full
-    public void insert(int insertInt) {
+    public void insert(Space insertSpace) {
+        int insertInt = insertSpace.getEntropy();
         int count = 0;
 
         // Special Case - Queue is Full
@@ -48,7 +49,7 @@ public class PriorityQueue {
 
         // Special Case - Queue is Empty
         else if (isEmpty()) {
-            queue[0] = insertInt;
+            queue[0] = insertSpace;
             amtOfItems++;
         }
 
@@ -57,31 +58,31 @@ public class PriorityQueue {
 
             // Iterate through Queue from Back
             for(count = amtOfItems-1; count>-1; count--) {
-                if(insertInt > queue[count]){
+                if(insertInt > queue[count].getEntropy()){
                     queue[count+1] = queue[count];
                 }
                 else {
                     break;
                 }
             }
-            queue[count+1] = insertInt;
+            queue[count+1] = insertSpace;
             amtOfItems++;
         }
     }
 
     // Remove Last Element
-    public int remove() {
+    public Space remove() {
 
         // Special Case for Queue Is Empty
         if(isEmpty()) {
-            return -1;
+            return null;
         }
         amtOfItems--; // move down queue
         return queue[amtOfItems];
     }
 
     // Get Minimum Peek
-    public int peekMinimum() {
+    public Space peekMinimum() {
         return queue[amtOfItems-1];
     }
 
