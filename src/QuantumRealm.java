@@ -82,26 +82,32 @@ public class QuantumRealm {
                     // Check Left
                     if(i - 1 > -1) {
                         // Left Case for ┌
-                        if(realm[i-1][j].getIcon().equals("┌")) {
+                        if(realm[i-1][j].getIcon().equals("┌")) { // some true
+                            possibleChars[0] = false;
                             possibleChars[3] = false;
-                            possibleChars[4] = false;
+                            possibleChars[5] = false;
                             possibleChars[6] = false;
                         }
                         // Left Case for ┐
                         if(realm[i-1][j].getIcon().equals("┐")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                            possibleChars[5] = false;
+                            possibleChars[1] = false;
+                            possibleChars[2] = false;
+                            possibleChars[4] = false;
+                            possibleChars[7] = false;
+                            possibleChars[8] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
                         // Left Case for ┘
                         if(realm[i-1][j].getIcon().equals("┘")) {
-                            possibleChars[0] = false;
+                            possibleChars[1] = false;
                             possibleChars[2] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[4] = false;
+                            possibleChars[7] = false;
+                            possibleChars[8] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
                         // Left Case for └
                         if(realm[i-1][j].getIcon().equals("└")) {
@@ -119,25 +125,37 @@ public class QuantumRealm {
                         }
                         // Left Case for ─
                         if(realm[i-1][j].getIcon().equals("│")) {
-                            possibleChars[0] = false;
+                            possibleChars[1] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[4] = false;
+                            possibleChars[7] = false;
+                            possibleChars[8] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
 
                         // Left Case for ├
                         if(realm[i-1][j].getIcon().equals("├")) {
-                            possibleChars[0] = false;
+                            possibleChars[1] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[4] = false;
+                            possibleChars[7] = false;
+                            possibleChars[8] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
                         // Left Case for ┤
                         if(realm[i-1][j].getIcon().equals("┤")) {
-                            possibleChars[0] = false;
+                            possibleChars[1] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[4] = false;
+                            possibleChars[7] = false;
+                            possibleChars[8] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
                         // Left Case for ┬
                         if(realm[i-1][j].getIcon().equals("┬")) {
@@ -165,79 +183,87 @@ public class QuantumRealm {
                     if(i + 1 < realm.length) {
                         // Right Case for ┌
                         if(realm[i+1][j].getIcon().equals("┌")) {
+                            possibleChars[0] = false;
                             possibleChars[3] = false;
                             possibleChars[4] = false;
                             possibleChars[6] = false;
+                            possibleChars[8] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
                         // Right Case for ┐
                         if(realm[i+1][j].getIcon().equals("┐")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
+                            possibleChars[1] = false;
+                            possibleChars[2] = false;
                             possibleChars[5] = false;
-                            possibleChars[6] = false;
-                            possibleChars[5] = false;
+                            possibleChars[7] = false;
                         }
                         // Right Case for ┘
                         if(realm[i+1][j].getIcon().equals("┘")) {
-                            possibleChars[0] = false;
+                            possibleChars[1] = false;
                             possibleChars[2] = false;
-                            possibleChars[3] = false;
                             possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[7] = false;
                         }
                         // Right Case for └
                         if(realm[i+1][j].getIcon().equals("└")) {
                             possibleChars[0] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
                             possibleChars[6] = false;
+                            possibleChars[8] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
                         // Right Case for ─
                         if(realm[i+1][j].getIcon().equals("─")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
+                            possibleChars[1] = false;
+                            possibleChars[2] = false;
                             possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[7] = false;
                         }
                         // Right Case for ─
                         if(realm[i+1][j].getIcon().equals("│")) {
                             possibleChars[0] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
                             possibleChars[6] = false;
+                            possibleChars[8] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
 
                         // Right Case for ├
                         if(realm[i+1][j].getIcon().equals("├")) {
                             possibleChars[0] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
                             possibleChars[6] = false;
+                            possibleChars[8] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
                         // Right Case for ┤
                         if(realm[i+1][j].getIcon().equals("┤")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
+                            possibleChars[1] = false;
+                            possibleChars[2] = false;
                             possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[7] = false;
                         }
                         // Right Case for ┬
                         if(realm[i+1][j].getIcon().equals("┬")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
+                            possibleChars[1] = false;
+                            possibleChars[2] = false;
                             possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[7] = false;
                         }
                         // Right Case for ┴
                         if(realm[i+1][j].getIcon().equals("┴")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
+                            possibleChars[1] = false;
+                            possibleChars[2] = false;
                             possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[7] = false;
                         }
                         // Right Case for ┼
                         if(realm[i+1][j].getIcon().equals("┼")) {
-                            possibleChars[0] = false;
+                            possibleChars[1] = false;
                             possibleChars[3] = false;
                             possibleChars[5] = false;
                             possibleChars[6] = false;
@@ -247,164 +273,187 @@ public class QuantumRealm {
                     if(j - 1 > -1) {
                         // Bottom Case for ┌
                         if(realm[i][j-1].getIcon().equals("┌")) {
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
+                            possibleChars[0] = false;
+                            possibleChars[1] = false;
+                            possibleChars[2] = false;
+                            possibleChars[5] = false;
                             possibleChars[6] = false;
+                            possibleChars[7] = false;
+                            possibleChars[8] = false;
+                            possibleChars[10] = false;
                         }
                         // Bottom Case for ┐
                         if(realm[i][j-1].getIcon().equals("┐")) {
                             possibleChars[0] = false;
-                            possibleChars[3] = false;
+                            possibleChars[1] = false;
                             possibleChars[5] = false;
                             possibleChars[6] = false;
-                            possibleChars[5] = false;
+                            possibleChars[7] = false;
+                            possibleChars[8] = false;
+                            possibleChars[10] = false;
                         }
                         // Bottom Case for ┘
                         if(realm[i][j-1].getIcon().equals("┘")) {
-                            possibleChars[0] = false;
                             possibleChars[2] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[4] = false;
+                            possibleChars[9] = false;
                         }
                         // Bottom Case for └
                         if(realm[i][j-1].getIcon().equals("└")) {
-                            possibleChars[0] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[4] = false;
+                            possibleChars[9] = false;
                         }
                         // Bottom Case for ─
                         if(realm[i][j-1].getIcon().equals("─")) {
                             possibleChars[0] = false;
-                            possibleChars[3] = false;
+                            possibleChars[1] = false;
                             possibleChars[5] = false;
                             possibleChars[6] = false;
+                            possibleChars[7] = false;
+                            possibleChars[8] = false;
+                            possibleChars[10] = false;
                         }
                         // Bottom Case for ─
                         if(realm[i][j-1].getIcon().equals("│")) {
-                            possibleChars[0] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[4] = false;
+                            possibleChars[9] = false;
                         }
 
                         // Bottom Case for ├
                         if(realm[i][j-1].getIcon().equals("├")) {
-                            possibleChars[0] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[4] = false;
+                            possibleChars[9] = false;
                         }
                         // Bottom Case for ┤
                         if(realm[i][j-1].getIcon().equals("┤")) {
-                            possibleChars[0] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[4] = false;
+                            possibleChars[9] = false;
                         }
                         // Bottom Case for ┬
                         if(realm[i][j-1].getIcon().equals("┬")) {
                             possibleChars[0] = false;
-                            possibleChars[3] = false;
+                            possibleChars[1] = false;
                             possibleChars[5] = false;
                             possibleChars[6] = false;
+                            possibleChars[7] = false;
+                            possibleChars[8] = false;
+                            possibleChars[10] = false;
                         }
                         // Bottom Case for ┴
                         if(realm[i][j-1].getIcon().equals("┴")) {
-                            possibleChars[0] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[4] = false;
+                            possibleChars[9] = false;
                         }
                         // Bottom Case for ┼
                         if(realm[i][j-1].getIcon().equals("┼")) {
-                            possibleChars[0] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[4] = false;
+                            possibleChars[9] = false;
                         }
                     }
                     // Check Top
                     if(j + 1 < realm[0].length) {
                         // Top Case for ┌
                         if(realm[i][j+1].getIcon().equals("┌")) {
-                            possibleChars[3] = false;
+                            possibleChars[0] = false;
+                            possibleChars[1] = false;
                             possibleChars[4] = false;
-                            possibleChars[6] = false;
+                            possibleChars[8] = false;
                         }
                         // Top Case for ┐
                         if(realm[i][j+1].getIcon().equals("┐")) {
                             possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                            possibleChars[5] = false;
+                            possibleChars[1] = false;
+                            possibleChars[4] = false;
+                            possibleChars[8] = false;
                         }
                         // Top Case for ┘
                         if(realm[i][j+1].getIcon().equals("┘")) {
-                            possibleChars[0] = false;
                             possibleChars[2] = false;
                             possibleChars[3] = false;
                             possibleChars[5] = false;
                             possibleChars[6] = false;
+                            possibleChars[7] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
                         // Top Case for └
                         if(realm[i][j+1].getIcon().equals("└")) {
-                            possibleChars[0] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
                             possibleChars[5] = false;
                             possibleChars[6] = false;
+                            possibleChars[7] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
                         // Top Case for ─
                         if(realm[i][j+1].getIcon().equals("─")) {
-                            possibleChars[0] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
                             possibleChars[5] = false;
                             possibleChars[6] = false;
+                            possibleChars[7] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
                         // Top Case for ─
                         if(realm[i][j+1].getIcon().equals("│")) {
                             possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[1] = false;
+                            possibleChars[4] = false;
+                            possibleChars[8] = false;
                         }
 
                         // Top Case for ├
                         if(realm[i][j+1].getIcon().equals("├")) {
                             possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[1] = false;
+                            possibleChars[4] = false;
+                            possibleChars[8] = false;
                         }
                         // Top Case for ┤
                         if(realm[i][j+1].getIcon().equals("┤")) {
                             possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[1] = false;
+                            possibleChars[4] = false;
+                            possibleChars[8] = false;
                         }
                         // Top Case for ┬
                         if(realm[i][j+1].getIcon().equals("┬")) {
                             possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[1] = false;
+                            possibleChars[4] = false;
+                            possibleChars[8] = false;
                         }
                         // Top Case for ┴
                         if(realm[i][j+1].getIcon().equals("┴")) {
-                            possibleChars[0] = false;
+                            possibleChars[2] = false;
                             possibleChars[3] = false;
                             possibleChars[5] = false;
                             possibleChars[6] = false;
+                            possibleChars[7] = false;
+                            possibleChars[9] = false;
+                            possibleChars[10] = false;
                         }
                         // Top Case for ┼
                         if(realm[i][j+1].getIcon().equals("┼")) {
                             possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
+                            possibleChars[1] = false;
+                            possibleChars[4] = false;
+                            possibleChars[8] = false;
                         }
                     }
 
@@ -455,7 +504,7 @@ public class QuantumRealm {
     public void displayRealm() {
         for(int i = 0; i<realm.length; i++) {
             for(int j = 0; j<realm[0].length; j++) {
-                System.out.print(realm[i][j] + " ");
+                System.out.print(realm[i][j]);
             }
             System.out.println();
         }
