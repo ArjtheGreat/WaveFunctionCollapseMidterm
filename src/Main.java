@@ -10,7 +10,6 @@ public class Main {
 
         // Quantum World Setup
         QuantumRealm quantumRealm = new QuantumRealm(4, 4);
-        quantumRealm.calculateEntropy();
         quantumRealm.collapseRealm();
         quantumRealm.displayRealm();
 

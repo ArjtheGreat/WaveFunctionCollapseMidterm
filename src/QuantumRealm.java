@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
@@ -30,6 +31,8 @@ import java.util.Random;
 
 public class QuantumRealm {
     Space[][] realm;
+    static int startingX;
+    static int startingY;
 
     // Constructor
     public QuantumRealm(int x, int y) {
@@ -39,8 +42,8 @@ public class QuantumRealm {
 
         // Generating Starting Point
         Random rand = new Random();
-        int startingX = rand.nextInt((x-1) + 1);
-        int startingY = rand.nextInt((x-1) + 1);
+        startingX = rand.nextInt((x-1) + 1);
+        startingY = rand.nextInt((x-1) + 1);
 
         // Setting Starting Point to Certain Icon
         for(int i = 0; i<realm.length; i++) {
@@ -66,408 +69,403 @@ public class QuantumRealm {
     }
 
     // Calculate Entropy
-    public void calculateEntropy() {
-        // Iterate Through Realm
-        for(int i = 0; i<realm.length; i++) {
-            for(int j = 0; j<realm[0].length; j++) {
-                // Space Is Empty = No Entropy
-                if(!realm[i][j].getIcon().equals(" ")) {
-                    realm[i][j].setEntropy(0);
+    public void calculateEntropy(int i, int j) {
+        // Space Is Empty = No Entropy
+        if(!realm[i][j].getIcon().equals(" ")) {
+            realm[i][j].setEntropy(0);
+        }
+        else {
+            // Array for possible characters
+            boolean[] possibleChars = new boolean[11];
+            Arrays.fill(possibleChars, true);
+
+            // Check Left
+            if (i - 1 > -1) {
+                // Left Case for ┌
+                if (realm[i - 1][j].getIcon().equals("┌")) { // some true
+                    possibleChars[0] = false;
+                    possibleChars[3] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
                 }
-                else {
-                    // Array for possible characters
-                    boolean[] possibleChars = new boolean[11];
-                    Arrays.fill(possibleChars, true);
+                // Left Case for ┐
+                if (realm[i - 1][j].getIcon().equals("┐")) {
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[4] = false;
+                    possibleChars[7] = false;
+                    possibleChars[8] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
+                // Left Case for ┘
+                if (realm[i - 1][j].getIcon().equals("┘")) {
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[7] = false;
+                    possibleChars[8] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
+                // Left Case for └
+                if (realm[i - 1][j].getIcon().equals("└")) {
+                    possibleChars[0] = false;
+                    possibleChars[3] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                }
+                // Left Case for ─
+                if (realm[i - 1][j].getIcon().equals("─")) {
+                    possibleChars[0] = false;
+                    possibleChars[3] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                }
+                // Left Case for ─
+                if (realm[i - 1][j].getIcon().equals("│")) {
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[7] = false;
+                    possibleChars[8] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
 
-                    // Check Left
-                    if(i - 1 > -1) {
-                        // Left Case for ┌
-                        if(realm[i-1][j].getIcon().equals("┌")) { // some true
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                        }
-                        // Left Case for ┐
-                        if(realm[i-1][j].getIcon().equals("┐")) {
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[4] = false;
-                            possibleChars[7] = false;
-                            possibleChars[8] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Left Case for ┘
-                        if(realm[i-1][j].getIcon().equals("┘")) {
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[7] = false;
-                            possibleChars[8] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Left Case for └
-                        if(realm[i-1][j].getIcon().equals("└")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                        }
-                        // Left Case for ─
-                        if(realm[i-1][j].getIcon().equals("─")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                        }
-                        // Left Case for ─
-                        if(realm[i-1][j].getIcon().equals("│")) {
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[7] = false;
-                            possibleChars[8] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
+                // Left Case for ├
+                if (realm[i - 1][j].getIcon().equals("├")) {
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[7] = false;
+                    possibleChars[8] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
+                // Left Case for ┤
+                if (realm[i - 1][j].getIcon().equals("┤")) {
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[7] = false;
+                    possibleChars[8] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
+                // Left Case for ┬
+                if (realm[i - 1][j].getIcon().equals("┬")) {
+                    possibleChars[0] = false;
+                    possibleChars[3] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                }
+                // Left Case for ┴
+                if (realm[i - 1][j].getIcon().equals("┴")) {
+                    possibleChars[0] = false;
+                    possibleChars[3] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                }
+                // Left Case for ┼
+                if (realm[i - 1][j].getIcon().equals("┼")) {
+                    possibleChars[0] = false;
+                    possibleChars[3] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                }
+            }
+            // Check Right
+            if (i + 1 < realm.length) {
+                // Right Case for ┌
+                if (realm[i + 1][j].getIcon().equals("┌")) {
+                    possibleChars[0] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[6] = false;
+                    possibleChars[8] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
+                // Right Case for ┐
+                if (realm[i + 1][j].getIcon().equals("┐")) {
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[5] = false;
+                    possibleChars[7] = false;
+                }
+                // Right Case for ┘
+                if (realm[i + 1][j].getIcon().equals("┘")) {
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[5] = false;
+                    possibleChars[7] = false;
+                }
+                // Right Case for └
+                if (realm[i + 1][j].getIcon().equals("└")) {
+                    possibleChars[0] = false;
+                    possibleChars[3] = false;
+                    possibleChars[6] = false;
+                    possibleChars[8] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
+                // Right Case for ─
+                if (realm[i + 1][j].getIcon().equals("─")) {
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[5] = false;
+                    possibleChars[7] = false;
+                }
+                // Right Case for ─
+                if (realm[i + 1][j].getIcon().equals("│")) {
+                    possibleChars[0] = false;
+                    possibleChars[3] = false;
+                    possibleChars[6] = false;
+                    possibleChars[8] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
 
-                        // Left Case for ├
-                        if(realm[i-1][j].getIcon().equals("├")) {
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[7] = false;
-                            possibleChars[8] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Left Case for ┤
-                        if(realm[i-1][j].getIcon().equals("┤")) {
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[7] = false;
-                            possibleChars[8] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Left Case for ┬
-                        if(realm[i-1][j].getIcon().equals("┬")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                        }
-                        // Left Case for ┴
-                        if(realm[i-1][j].getIcon().equals("┴")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                        }
-                        // Left Case for ┼
-                        if(realm[i-1][j].getIcon().equals("┼")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                        }
-                    }
-                    // Check Right
-                    if(i + 1 < realm.length) {
-                        // Right Case for ┌
-                        if(realm[i+1][j].getIcon().equals("┌")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[6] = false;
-                            possibleChars[8] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Right Case for ┐
-                        if(realm[i+1][j].getIcon().equals("┐")) {
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[5] = false;
-                            possibleChars[7] = false;
-                        }
-                        // Right Case for ┘
-                        if(realm[i+1][j].getIcon().equals("┘")) {
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[5] = false;
-                            possibleChars[7] = false;
-                        }
-                        // Right Case for └
-                        if(realm[i+1][j].getIcon().equals("└")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[6] = false;
-                            possibleChars[8] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Right Case for ─
-                        if(realm[i+1][j].getIcon().equals("─")) {
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[5] = false;
-                            possibleChars[7] = false;
-                        }
-                        // Right Case for ─
-                        if(realm[i+1][j].getIcon().equals("│")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[6] = false;
-                            possibleChars[8] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
+                // Right Case for ├
+                if (realm[i + 1][j].getIcon().equals("├")) {
+                    possibleChars[0] = false;
+                    possibleChars[3] = false;
+                    possibleChars[6] = false;
+                    possibleChars[8] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
+                // Right Case for ┤
+                if (realm[i + 1][j].getIcon().equals("┤")) {
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[5] = false;
+                    possibleChars[7] = false;
+                }
+                // Right Case for ┬
+                if (realm[i + 1][j].getIcon().equals("┬")) {
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[5] = false;
+                    possibleChars[7] = false;
+                }
+                // Right Case for ┴
+                if (realm[i + 1][j].getIcon().equals("┴")) {
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[5] = false;
+                    possibleChars[7] = false;
+                }
+                // Right Case for ┼
+                if (realm[i + 1][j].getIcon().equals("┼")) {
+                    possibleChars[1] = false;
+                    possibleChars[3] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                }
+            }
+            // Check Bottom
+            if (j - 1 > -1) {
+                // Bottom Case for ┌
+                if (realm[i][j - 1].getIcon().equals("┌")) {
+                    possibleChars[0] = false;
+                    possibleChars[1] = false;
+                    possibleChars[2] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                    possibleChars[7] = false;
+                    possibleChars[8] = false;
+                    possibleChars[10] = false;
+                }
+                // Bottom Case for ┐
+                if (realm[i][j - 1].getIcon().equals("┐")) {
+                    possibleChars[0] = false;
+                    possibleChars[1] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                    possibleChars[7] = false;
+                    possibleChars[8] = false;
+                    possibleChars[10] = false;
+                }
+                // Bottom Case for ┘
+                if (realm[i][j - 1].getIcon().equals("┘")) {
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[9] = false;
+                }
+                // Bottom Case for └
+                if (realm[i][j - 1].getIcon().equals("└")) {
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[9] = false;
+                }
+                // Bottom Case for ─
+                if (realm[i][j - 1].getIcon().equals("─")) {
+                    possibleChars[0] = false;
+                    possibleChars[1] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                    possibleChars[7] = false;
+                    possibleChars[8] = false;
+                    possibleChars[10] = false;
+                }
+                // Bottom Case for ─
+                if (realm[i][j - 1].getIcon().equals("│")) {
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[9] = false;
+                }
 
-                        // Right Case for ├
-                        if(realm[i+1][j].getIcon().equals("├")) {
-                            possibleChars[0] = false;
-                            possibleChars[3] = false;
-                            possibleChars[6] = false;
-                            possibleChars[8] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Right Case for ┤
-                        if(realm[i+1][j].getIcon().equals("┤")) {
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[5] = false;
-                            possibleChars[7] = false;
-                        }
-                        // Right Case for ┬
-                        if(realm[i+1][j].getIcon().equals("┬")) {
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[5] = false;
-                            possibleChars[7] = false;
-                        }
-                        // Right Case for ┴
-                        if(realm[i+1][j].getIcon().equals("┴")) {
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[5] = false;
-                            possibleChars[7] = false;
-                        }
-                        // Right Case for ┼
-                        if(realm[i+1][j].getIcon().equals("┼")) {
-                            possibleChars[1] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                        }
-                    }
-                    // Check Bottom
-                    if(j - 1 > -1) {
-                        // Bottom Case for ┌
-                        if(realm[i][j-1].getIcon().equals("┌")) {
-                            possibleChars[0] = false;
-                            possibleChars[1] = false;
-                            possibleChars[2] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                            possibleChars[7] = false;
-                            possibleChars[8] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Bottom Case for ┐
-                        if(realm[i][j-1].getIcon().equals("┐")) {
-                            possibleChars[0] = false;
-                            possibleChars[1] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                            possibleChars[7] = false;
-                            possibleChars[8] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Bottom Case for ┘
-                        if(realm[i][j-1].getIcon().equals("┘")) {
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[9] = false;
-                        }
-                        // Bottom Case for └
-                        if(realm[i][j-1].getIcon().equals("└")) {
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[9] = false;
-                        }
-                        // Bottom Case for ─
-                        if(realm[i][j-1].getIcon().equals("─")) {
-                            possibleChars[0] = false;
-                            possibleChars[1] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                            possibleChars[7] = false;
-                            possibleChars[8] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Bottom Case for ─
-                        if(realm[i][j-1].getIcon().equals("│")) {
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[9] = false;
-                        }
+                // Bottom Case for ├
+                if (realm[i][j - 1].getIcon().equals("├")) {
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[9] = false;
+                }
+                // Bottom Case for ┤
+                if (realm[i][j - 1].getIcon().equals("┤")) {
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[9] = false;
+                }
+                // Bottom Case for ┬
+                if (realm[i][j - 1].getIcon().equals("┬")) {
+                    possibleChars[0] = false;
+                    possibleChars[1] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                    possibleChars[7] = false;
+                    possibleChars[8] = false;
+                    possibleChars[10] = false;
+                }
+                // Bottom Case for ┴
+                if (realm[i][j - 1].getIcon().equals("┴")) {
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[9] = false;
+                }
+                // Bottom Case for ┼
+                if (realm[i][j - 1].getIcon().equals("┼")) {
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[4] = false;
+                    possibleChars[9] = false;
+                }
+            }
+            // Check Top
+            if (j + 1 < realm[0].length) {
+                // Top Case for ┌
+                if (realm[i][j + 1].getIcon().equals("┌")) {
+                    possibleChars[0] = false;
+                    possibleChars[1] = false;
+                    possibleChars[4] = false;
+                    possibleChars[8] = false;
+                }
+                // Top Case for ┐
+                if (realm[i][j + 1].getIcon().equals("┐")) {
+                    possibleChars[0] = false;
+                    possibleChars[1] = false;
+                    possibleChars[4] = false;
+                    possibleChars[8] = false;
+                }
+                // Top Case for ┘
+                if (realm[i][j + 1].getIcon().equals("┘")) {
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                    possibleChars[7] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
+                // Top Case for └
+                if (realm[i][j + 1].getIcon().equals("└")) {
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                    possibleChars[7] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
+                // Top Case for ─
+                if (realm[i][j + 1].getIcon().equals("─")) {
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                    possibleChars[7] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
+                // Top Case for ─
+                if (realm[i][j + 1].getIcon().equals("│")) {
+                    possibleChars[0] = false;
+                    possibleChars[1] = false;
+                    possibleChars[4] = false;
+                    possibleChars[8] = false;
+                }
 
-                        // Bottom Case for ├
-                        if(realm[i][j-1].getIcon().equals("├")) {
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[9] = false;
-                        }
-                        // Bottom Case for ┤
-                        if(realm[i][j-1].getIcon().equals("┤")) {
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[9] = false;
-                        }
-                        // Bottom Case for ┬
-                        if(realm[i][j-1].getIcon().equals("┬")) {
-                            possibleChars[0] = false;
-                            possibleChars[1] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                            possibleChars[7] = false;
-                            possibleChars[8] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Bottom Case for ┴
-                        if(realm[i][j-1].getIcon().equals("┴")) {
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[9] = false;
-                        }
-                        // Bottom Case for ┼
-                        if(realm[i][j-1].getIcon().equals("┼")) {
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[4] = false;
-                            possibleChars[9] = false;
-                        }
-                    }
-                    // Check Top
-                    if(j + 1 < realm[0].length) {
-                        // Top Case for ┌
-                        if(realm[i][j+1].getIcon().equals("┌")) {
-                            possibleChars[0] = false;
-                            possibleChars[1] = false;
-                            possibleChars[4] = false;
-                            possibleChars[8] = false;
-                        }
-                        // Top Case for ┐
-                        if(realm[i][j+1].getIcon().equals("┐")) {
-                            possibleChars[0] = false;
-                            possibleChars[1] = false;
-                            possibleChars[4] = false;
-                            possibleChars[8] = false;
-                        }
-                        // Top Case for ┘
-                        if(realm[i][j+1].getIcon().equals("┘")) {
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                            possibleChars[7] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Top Case for └
-                        if(realm[i][j+1].getIcon().equals("└")) {
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                            possibleChars[7] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Top Case for ─
-                        if(realm[i][j+1].getIcon().equals("─")) {
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                            possibleChars[7] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Top Case for ─
-                        if(realm[i][j+1].getIcon().equals("│")) {
-                            possibleChars[0] = false;
-                            possibleChars[1] = false;
-                            possibleChars[4] = false;
-                            possibleChars[8] = false;
-                        }
+                // Top Case for ├
+                if (realm[i][j + 1].getIcon().equals("├")) {
+                    possibleChars[0] = false;
+                    possibleChars[1] = false;
+                    possibleChars[4] = false;
+                    possibleChars[8] = false;
+                }
+                // Top Case for ┤
+                if (realm[i][j + 1].getIcon().equals("┤")) {
+                    possibleChars[0] = false;
+                    possibleChars[1] = false;
+                    possibleChars[4] = false;
+                    possibleChars[8] = false;
+                }
+                // Top Case for ┬
+                if (realm[i][j + 1].getIcon().equals("┬")) {
+                    possibleChars[0] = false;
+                    possibleChars[1] = false;
+                    possibleChars[4] = false;
+                    possibleChars[8] = false;
+                }
+                // Top Case for ┴
+                if (realm[i][j + 1].getIcon().equals("┴")) {
+                    possibleChars[2] = false;
+                    possibleChars[3] = false;
+                    possibleChars[5] = false;
+                    possibleChars[6] = false;
+                    possibleChars[7] = false;
+                    possibleChars[9] = false;
+                    possibleChars[10] = false;
+                }
+                // Top Case for ┼
+                if (realm[i][j + 1].getIcon().equals("┼")) {
+                    possibleChars[0] = false;
+                    possibleChars[1] = false;
+                    possibleChars[4] = false;
+                    possibleChars[8] = false;
+                }
+            }
 
-                        // Top Case for ├
-                        if(realm[i][j+1].getIcon().equals("├")) {
-                            possibleChars[0] = false;
-                            possibleChars[1] = false;
-                            possibleChars[4] = false;
-                            possibleChars[8] = false;
-                        }
-                        // Top Case for ┤
-                        if(realm[i][j+1].getIcon().equals("┤")) {
-                            possibleChars[0] = false;
-                            possibleChars[1] = false;
-                            possibleChars[4] = false;
-                            possibleChars[8] = false;
-                        }
-                        // Top Case for ┬
-                        if(realm[i][j+1].getIcon().equals("┬")) {
-                            possibleChars[0] = false;
-                            possibleChars[1] = false;
-                            possibleChars[4] = false;
-                            possibleChars[8] = false;
-                        }
-                        // Top Case for ┴
-                        if(realm[i][j+1].getIcon().equals("┴")) {
-                            possibleChars[2] = false;
-                            possibleChars[3] = false;
-                            possibleChars[5] = false;
-                            possibleChars[6] = false;
-                            possibleChars[7] = false;
-                            possibleChars[9] = false;
-                            possibleChars[10] = false;
-                        }
-                        // Top Case for ┼
-                        if(realm[i][j+1].getIcon().equals("┼")) {
-                            possibleChars[0] = false;
-                            possibleChars[1] = false;
-                            possibleChars[4] = false;
-                            possibleChars[8] = false;
-                        }
-                    }
+            // calculate entropy (# of true characters) using some fancy frequency stuff
+            for (int x = 0; x < possibleChars.length; x++) {
 
-                    // calculate entropy (# of true characters) using some fancy frequency stuff
-                    for(int x = 0; x<possibleChars.length; x++) {
-
-                        // Is Possible Space
-                        if(possibleChars[x]) {
-                            // sets entropy
-                            realm[i][j].setEntropy(realm[i][j].getEntropy()+1);
-                            // adds current char to possible chars
-                            realm[i][j].addPossibleIcon(intToIcon(x));
-                        }
-                    }
+                // Is Possible Space
+                if (possibleChars[x]) {
+                    // sets entropy
+                    realm[i][j].setEntropy(realm[i][j].getEntropy() + 1);
+                    // adds current char to possible chars
+                    realm[i][j].addPossibleIcon(intToIcon(x));
                 }
             }
         }
@@ -478,27 +476,74 @@ public class QuantumRealm {
         // Keeps Track of Entropy For All Spaces
         PriorityQueue entropyStorage = new PriorityQueue(getRealm().length*getRealm()[0].length);
 
-        // Add all Elligble spaces
-        for(int i = 0; i<realm.length; i++) {
-            for(int j = 0; j<realm[0].length; j++) {
-                if(realm[i][j].getEntropy() > 0) { // Not Already Filled
-                    entropyStorage.insert(realm[i][j]);
+        int iterX = startingX;
+        int iterY = startingY;
+
+        int counter = 0;
+
+        while(counter != realm.length*realm[0].length) {
+            int[] neighborEntropies = new int[4];
+            Arrays.fill(neighborEntropies, 13);
+
+            if(iterX-1 > -1) {
+                calculateEntropy(iterX-1, iterY);
+                if(realm[iterX-1][iterY].getEntropy() > 0) {
+                    entropyStorage.insert(realm[iterX-1][iterY]);
+                    neighborEntropies[0] = realm[iterX-1][iterY].getEntropy();
                 }
             }
-        }
+            if(iterY-1 > -1) {
+                calculateEntropy(iterX, iterY-1);
+                if(realm[iterX][iterY-1].getEntropy() > 0) {
+                    entropyStorage.insert(realm[iterX][iterY-1]);
+                    neighborEntropies[1] = realm[iterX][iterY-1].getEntropy();
+                }
+            }
+            if(iterX+1 < realm.length) {
+                calculateEntropy(iterX+1, iterY);
+                if(realm[iterX+1][iterY].getEntropy() > 0) {
+                    entropyStorage.insert(realm[iterX+1][iterY]);
+                    neighborEntropies[2] = realm[iterX+1][iterY].getEntropy();
+                }
+            }
+            if(iterY+1 < realm[0].length) {
+                calculateEntropy(iterX, iterY+1);
+                if(realm[iterX][iterY+1].getEntropy() > 0) {
+                    entropyStorage.insert(realm[iterX][iterY+1]);
+                    neighborEntropies[3] = realm[iterX][iterY+1].getEntropy();
+                }
+            }
 
-        // Iterates through entropy storage priority queue
-        for(int i = 0; i<entropyStorage.amtOfItems; i++) {
+            System.out.println(neighborEntropies[indexOfSmallest(neighborEntropies)]);
+            if(indexOfSmallest(neighborEntropies) == 0) { iterX--; } if(indexOfSmallest(neighborEntropies) == 1) { iterY--; } if(indexOfSmallest(neighborEntropies) == 2) { iterX++; } if(indexOfSmallest(neighborEntropies) == 3) { iterY++; }
 
+
+
+            System.out.println(iterX + ", " + iterY);
             // Removes Top
             Space removedSpace = entropyStorage.remove();
+            System.out.println(removedSpace.getIcon() + ", " + removedSpace.possibleIcons);
 
             // Finds Random Possible Elligible Character and sets it as icon
             Random rand = new Random();
             int index = rand.nextInt(removedSpace.getPossibleIcons().size());
             removedSpace.setIcon(removedSpace.getPossibleIcons().get(index));
+            counter++;
+            displayRealm();
         }
     }
+
+
+    public int indexOfSmallest(int[] arr) {
+        int imin = 0;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < arr[imin]) {
+                imin = i;
+            }
+        }
+        return imin;
+    }
+
 
     // Prints Out Realm
     public void displayRealm() {
